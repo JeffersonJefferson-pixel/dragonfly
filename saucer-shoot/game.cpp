@@ -1,12 +1,21 @@
 //
 // game.cpp
-// 
-
-#define NO_NETWORK true
+//
 
 // Engine includes.
 #include "GameManager.h"
 #include "LogManager.h"
+#include "ResourceManager.h"
+#include "Saucer.h"
+
+void loadResources(void) {
+    // load saucer sprite.
+    RM.loadSprite("sprites/saucer-spr.txt", "saucer");
+}
+
+void populateWorld(void) {
+    new Saucer();
+}
 
 int main(int argc, char *argv[]) {
 
@@ -23,8 +32,16 @@ int main(int argc, char *argv[]) {
   // Show splash screen.
   df::splash();
 
+  // Load game resources.
+  loadResources();
+
+  // populare game world with some objects.
+  populateWorld();
+
+  GM.run();
+
   // Shut everything down.
-  GM.shutDown();
+  //GM.shutDown();
   return 0;
 }
 
