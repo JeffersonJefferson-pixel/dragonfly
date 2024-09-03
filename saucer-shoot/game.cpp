@@ -7,14 +7,20 @@
 #include "LogManager.h"
 #include "ResourceManager.h"
 #include "Saucer.h"
+#include "Hero.h"
 
 void loadResources(void) {
     // load saucer sprite.
     RM.loadSprite("sprites/saucer-spr.txt", "saucer");
+    // load ship sprite.
+    RM.loadSprite("sprites/ship-spr.txt", "ship");
 }
 
 void populateWorld(void) {
+    // add saucer to world.
     new Saucer();
+    // add hero to world.
+    new Hero();
 }
 
 int main(int argc, char *argv[]) {
@@ -40,8 +46,6 @@ int main(int argc, char *argv[]) {
 
   GM.run();
 
-  // Shut everything down.
-  //GM.shutDown();
   return 0;
 }
 
