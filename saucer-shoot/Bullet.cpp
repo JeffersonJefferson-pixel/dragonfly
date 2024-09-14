@@ -1,4 +1,5 @@
 #include "WorldManager.h"
+#include "EventOut.h";
 
 #include "Bullet.h"
 
@@ -18,6 +19,11 @@ Bullet::Bullet(df::Vector hero_pos) {
 }
 
 int Bullet::eventHandler(const df::Event* p_e) {
+	// react when bullet is leaves the window.
+	if (p_e->getType() == df::OUT_EVENT) {
+		out();
+		return 1;
+	}
 	// react when it hits a saucer
 	if (p_e->getType() == df::COLLISION_EVENT) {
 		const df::EventCollision* p_collision_event = dynamic_cast <const df::EventCollision*> (p_e);

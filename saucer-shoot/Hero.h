@@ -2,6 +2,8 @@
 #include "EventKeyboard.h"
 
 #include "Bullet.h"
+#include "Reticle.h"
+
 
 class Hero : public df::Object {
 	private: 
@@ -9,6 +11,7 @@ class Hero : public df::Object {
 		int move_countdown;
 		int fire_slowdown;
 		int fire_countdown;
+		Reticle* p_reticle;
 
 		void kbd(const df::EventKeyboard* p_keyboard_event);
 		void move(int dy);

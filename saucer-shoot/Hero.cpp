@@ -24,6 +24,10 @@ Hero::Hero() {
 	// set position on the left edge of the window, mid-way down vertically.
 	df::Vector p(7, WM.getBoundary().getVertical() / 2);
 	setPosition(p);
+
+	// create reticle for aiming.
+	p_reticle = new Reticle();
+	p_reticle->draw();
 }
 
 int Hero::eventHandler(const df::Event* p_e) {
