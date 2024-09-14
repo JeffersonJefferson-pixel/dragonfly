@@ -2,10 +2,9 @@
 #include "LogManager.h"
 #include "WorldManager.h"
 #include "ResourceManager.h"
-#include "EventOut.h";
+#include "EventOut.h"
 #include "stdlib.h"
-
-
+#include "Explosion.h"
 
 Saucer::Saucer() {
 	// Setup "saucer" sprite.
@@ -27,6 +26,11 @@ Saucer::Saucer() {
 int Saucer::eventHandler(const df::Event* p_e) {
 	if (p_e->getType() == df::OUT_EVENT) {
 		out();
+		return 1;
+	}
+	if (p_e->getType() == df::COLLISION_EVENT) {
+		const df::EventCollision* p_c = dynamic_cast <const df::EventCollision*> (p_e);
+		hit(p_c);
 		return 1;
 	}
 
@@ -52,4 +56,23 @@ void Saucer::moveToStart() {
 	temp_pos.setY(rand() % (int)(world_vert - 1) + 1.0f);
 
 	WM.moveObject(this, temp_pos);
+}
+
+void Saucer::hit(const df::EventCollision* p_c) {
+	// ignore saucer-saucer collision.
+	if ((p_c->getObject1()->getType() == "Saucer") &&
+		(p_c->getObject2()->getType() == "Saucer"))
+		return;
+	// create explosion if saucer-bullet.
+	if ((p_c->getObject1()->getType() == "Bullet") ||
+		(p_c->getObject2()->getType() == "Bullet")) {
+		Explosion *p_explosion = new Explosion();
+		p_explosion->setPosition(this->getPosition());
+
+		// set to spectral
+		setSolidness(df::SPECTRAL);
+		
+		// spawn new saucer.
+		new Saucer();
+	}
 }
