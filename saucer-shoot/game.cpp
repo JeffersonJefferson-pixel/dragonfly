@@ -8,6 +8,7 @@
 #include "ResourceManager.h"
 #include "Saucer.h"
 #include "Hero.h"
+#include "Points.h"
 
 void loadResources(void) {
     // load saucer sprite.
@@ -22,7 +23,9 @@ void loadResources(void) {
 
 void populateWorld(void) {
     // add saucer to world.
-    new Saucer();
+    for (int i = 0; i < 16; i++) {
+        new Saucer;
+    }
     // add hero to world.
     new Hero();
 }
@@ -47,6 +50,14 @@ int main(int argc, char *argv[]) {
 
   // populare game world with some objects.
   populateWorld();
+
+  // set up heads-up display
+  new Points;
+  df::ViewObject* p_vo = new df::ViewObject;
+  p_vo->setLocation(df::TOP_LEFT);
+  p_vo->setViewString("Nukes");
+  p_vo->setValue(1);
+  p_vo->setColor(df::YELLOW);
 
   GM.run();
 

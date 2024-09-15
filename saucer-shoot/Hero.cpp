@@ -4,7 +4,8 @@
 #include "ResourceManager.h"
 #include "EventStep.h"
 #include "EventMouse.h"
-
+#include "EventView.h"
+#include "EventNuke.h"
 #include "Hero.h"
 
 Hero::Hero() {
@@ -12,6 +13,7 @@ Hero::Hero() {
 	move_countdown = move_slowdown;
 	fire_slowdown = 15;
 	fire_countdown = fire_slowdown;
+	nuke_count = 1;
 
 	// Link to "ship" sprite.
 	setSprite("ship");
@@ -28,6 +30,10 @@ Hero::Hero() {
 	// create reticle for aiming.
 	p_reticle = new Reticle();
 	p_reticle->draw();
+}
+
+Hero::~Hero() {
+	GM.setGameOver();
 }
 
 int Hero::eventHandler(const df::Event* p_e) {
@@ -68,6 +74,10 @@ void Hero::kbd(const df::EventKeyboard* p_keyboard_event) {
 				move(+1);
 			}
 			break;
+		case df::Keyboard::SPACE:
+			if (p_keyboard_event->getKeyboardAction() == df::KEY_DOWN) {
+				nuke();
+			}
 	}
 }
 
@@ -79,7 +89,7 @@ void Hero::move(int dy) {
 
 	// if statys on window, allow move
 	df::Vector new_pos(getPosition().getX(), getPosition().getY() + dy);
-	if ((new_pos.getY() > 3) && (new_pos.getY() < WM.getBoundary().getVertical() - 1))
+	if ((new_pos.getY() > 3) && (new_pos.getY() < WM.getBoundary().getVertical()))
 		WM.moveObject(this, new_pos);
 }
 
@@ -110,4 +120,16 @@ void Hero::mouse(const df::EventMouse* p_mouse_event) {
 	if ((p_mouse_event->getMouseAction() == df::CLICKED) &&
 		(p_mouse_event->getMouseButton() == df::Mouse::LEFT))
 		fire(p_mouse_event->getMousePosition());
+}
+
+void Hero::nuke() {
+	// check if nukes left
+	if (!nuke_count)
+		return;
+	nuke_count--;
+	EventNuke nuke;
+	WM.onEvent(&nuke);
+	// send view event to decrement nukes.
+	df::EventView ev("Nukes", -1, true);
+	WM.onEvent(&ev);
 }

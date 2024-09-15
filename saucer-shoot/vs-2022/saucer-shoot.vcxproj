@@ -152,16 +152,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Bullet.h" />
+    <ClInclude Include="..\EventNuke.h" />
     <ClInclude Include="..\Explosion.h" />
     <ClInclude Include="..\Hero.h" />
+    <ClInclude Include="..\Points.h" />
     <ClInclude Include="..\Reticle.h" />
     <ClInclude Include="..\Saucer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Bullet.cpp" />
+    <ClCompile Include="..\EventNuke.cpp" />
     <ClCompile Include="..\Explosion.cpp" />
     <ClCompile Include="..\game.cpp" />
     <ClCompile Include="..\Hero.cpp" />
+    <ClCompile Include="..\Points.cpp" />
     <ClCompile Include="..\Reticle.cpp" />
     <ClCompile Include="..\Saucer.cpp" />
   </ItemGroup>

@@ -30,6 +30,12 @@
     <ClInclude Include="..\Explosion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\EventNuke.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Points.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\game.cpp">
@@ -48,6 +54,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Explosion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EventNuke.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Points.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
