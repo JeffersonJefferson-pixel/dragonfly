@@ -9,6 +9,7 @@
 #include "Saucer.h"
 #include "Hero.h"
 #include "Points.h"
+#include "Star.h"
 
 void loadResources(void) {
     // load saucer sprite.
@@ -27,7 +28,11 @@ void populateWorld(void) {
         new Saucer;
     }
     // add hero to world.
-    new Hero();
+    new Hero;
+    // create some stars.
+    for (int i = 0; i < 16; i++) {
+        new Star;
+    }
 }
 
 int main(int argc, char *argv[]) {
