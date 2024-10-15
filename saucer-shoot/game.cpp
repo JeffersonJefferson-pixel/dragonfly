@@ -20,6 +20,8 @@ void loadResources(void) {
     RM.loadSprite("sprites/bullet-spr.txt", "bullet");
     // load explosion sprite.
     RM.loadSprite("sprites/explosion-spr.txt", "explosion");
+    // load gameover sprite.
+    RM.loadSprite("sprites/gameover-spr.txt", "gameover");
 }
 
 void populateWorld(void) {

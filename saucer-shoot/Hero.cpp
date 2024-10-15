@@ -7,6 +7,7 @@
 #include "EventView.h"
 #include "EventNuke.h"
 #include "Hero.h"
+#include "GameOver.h"
 
 Hero::Hero() {
 	move_slowdown = 2;
@@ -33,7 +34,13 @@ Hero::Hero() {
 }
 
 Hero::~Hero() {
-	GM.setGameOver();
+	// create gameover object.
+	new GameOver;
+	WM.markForDelete(p_reticle);
+	df::addParticles(df::SPARKS, getPosition(), 2, df::BLUE);
+	df::addParticles(df::SPARKS, getPosition(), 2, df::YELLOW);
+	df::addParticles(df::SPARKS, getPosition(), 3, df::RED);
+	df::addParticles(df::SPARKS, getPosition(), 3, df::RED);
 }
 
 int Hero::eventHandler(const df::Event* p_e) {
