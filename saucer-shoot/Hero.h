@@ -1,5 +1,6 @@
 #include "Object.h"
 #include "EventKeyboard.h"
+#include "EventMouse.h"
 
 #include "Bullet.h"
 #include "Reticle.h"

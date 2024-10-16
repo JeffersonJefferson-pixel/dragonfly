@@ -64,10 +64,10 @@ int Hero::eventHandler(const df::Event* p_e) {
 
 void Hero::kbd(const df::EventKeyboard* p_keyboard_event) {
 	switch (p_keyboard_event->getKey()) {
-		// quit
+		// return to main menu
 		case df::Keyboard::Q: 
 			if (p_keyboard_event->getKeyboardAction() == df::KEY_PRESSED) {
-				GM.setGameOver();
+				WM.markForDelete(this);
 			}
 			break;
 		// up
@@ -85,6 +85,7 @@ void Hero::kbd(const df::EventKeyboard* p_keyboard_event) {
 			if (p_keyboard_event->getKeyboardAction() == df::KEY_DOWN) {
 				nuke();
 			}
+			break;
 	}
 }
 

@@ -31,7 +31,16 @@ void GameOver::step() {
 }
 
 GameOver::~GameOver() {
-	GM.setGameOver();
+	// remove saucers and view objects, re-activate gamestart.
+	df::ObjectList object_list = WM.getAllObjects(true);
+	df::ObjectListIterator i(&object_list);
+	for (i.first(); !i.isDone(); i.next()) {
+		df::Object* p_o = i.currentObject();
+		if (p_o->getType() == "Saucer" || p_o->getType() == "ViewObject")
+			WM.markForDelete(p_o);
+		if (p_o->getType() == "GameStart")
+			p_o->setActive(true);
+	}
 }
 
 int GameOver::draw() {

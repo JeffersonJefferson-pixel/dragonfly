@@ -6,10 +6,8 @@
 #include "GameManager.h"
 #include "LogManager.h"
 #include "ResourceManager.h"
-#include "Saucer.h"
-#include "Hero.h"
-#include "Points.h"
 #include "Star.h"
+#include "GameStart.h"
 
 void loadResources(void) {
     // load saucer sprite.
@@ -22,19 +20,16 @@ void loadResources(void) {
     RM.loadSprite("sprites/explosion-spr.txt", "explosion");
     // load gameover sprite.
     RM.loadSprite("sprites/gameover-spr.txt", "gameover");
+    RM.loadSprite("sprites/gamestart-spr.txt", "gamestart");
 }
 
 void populateWorld(void) {
-    // add saucer to world.
-    for (int i = 0; i < 16; i++) {
-        new Saucer;
-    }
-    // add hero to world.
-    new Hero;
     // create some stars.
     for (int i = 0; i < 16; i++) {
         new Star;
     }
+    // game start
+    new GameStart();
 }
 
 int main(int argc, char *argv[]) {
@@ -57,14 +52,6 @@ int main(int argc, char *argv[]) {
 
   // populare game world with some objects.
   populateWorld();
-
-  // set up heads-up display
-  new Points;
-  df::ViewObject* p_vo = new df::ViewObject;
-  p_vo->setLocation(df::TOP_LEFT);
-  p_vo->setViewString("Nukes");
-  p_vo->setValue(1);
-  p_vo->setColor(df::YELLOW);
 
   GM.run();
 
