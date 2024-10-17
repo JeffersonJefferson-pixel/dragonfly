@@ -21,6 +21,13 @@ void loadResources(void) {
     // load gameover sprite.
     RM.loadSprite("sprites/gameover-spr.txt", "gameover");
     RM.loadSprite("sprites/gamestart-spr.txt", "gamestart");
+    // load sounds.
+    RM.loadSound("sounds/fire.wav", "fire");
+    RM.loadSound("sounds/explode.wav", "explode");
+    RM.loadSound("sounds/nuke.wav", "nuke");
+    RM.loadSound("sounds/game-over.wav", "gameover");
+    // load music.
+    RM.loadMusic("sounds/start-music.wav", "startmusic");
 }
 
 void populateWorld(void) {

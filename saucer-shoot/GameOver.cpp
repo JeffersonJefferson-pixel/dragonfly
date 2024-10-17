@@ -2,9 +2,12 @@
 #include "EventStep.h"
 #include "WorldManager.h"
 #include "GameManager.h"
+#include "ResourceManager.h"
+#include "GameStart.h"
 
 GameOver::GameOver() {
 	setType("GameOver");
+	// set time to live.
 	if (setSprite("gameover") == 0)
 		time_to_live = getAnimation().getSprite()->getFrameCount() *
 			getAnimation().getSprite()->getSlowdown();
@@ -14,6 +17,10 @@ GameOver::GameOver() {
 	setLocation(df::CENTER_CENTER);
 
 	registerInterest(df::STEP_EVENT);
+	// play gameover sound.
+	df::Sound* p_sound = RM.getSound("gameover");
+	if (p_sound)
+		p_sound->play();
 }
 
 int GameOver::eventHandler(const df::Event* p_e) {
@@ -25,6 +32,7 @@ int GameOver::eventHandler(const df::Event* p_e) {
 }
 
 void GameOver::step() {
+	// decrease time to live.
 	time_to_live--;
 	if (time_to_live <= 0)
 		WM.markForDelete(this);
@@ -38,8 +46,10 @@ GameOver::~GameOver() {
 		df::Object* p_o = i.currentObject();
 		if (p_o->getType() == "Saucer" || p_o->getType() == "ViewObject")
 			WM.markForDelete(p_o);
-		if (p_o->getType() == "GameStart")
+		if (p_o->getType() == "GameStart") {
 			p_o->setActive(true);
+			dynamic_cast <GameStart*> (p_o)->playMusic();
+		}
 	}
 }
 

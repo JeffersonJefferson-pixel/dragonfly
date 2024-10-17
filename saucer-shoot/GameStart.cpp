@@ -4,12 +4,16 @@
 #include "Hero.h"
 #include "Saucer.h"
 #include "Points.h"
+#include "ResourceManager.h"
 
 GameStart::GameStart() {
 	setType("GameStart");
 	setLocation(df::CENTER_CENTER);
 	setSprite("gamestart");
 	registerInterest(df::KEYBOARD_EVENT);
+	// play start music.
+	p_music = RM.getMusic("startmusic");
+	playMusic();
 }
 
 int GameStart::eventHandler(const df::Event* p_e) {
@@ -46,8 +50,13 @@ void GameStart::start() {
 	p_vo->setColor(df::YELLOW);
 	// when game start, become inactive.
 	setActive(false);
+	p_music->pause();
 }
 
 int GameStart::draw() {
 	return df::Object::draw();
+}
+
+void GameStart::playMusic() {
+	p_music->play();
 }

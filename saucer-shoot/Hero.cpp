@@ -122,6 +122,10 @@ void Hero::fire(df::Vector target) {
 	v.scale(1);
 	Bullet* p = new Bullet(getPosition());
 	p->setVelocity(v);
+	// play fire sound.
+	df::Sound* p_sound = RM.getSound("fire");
+	if (p_sound)
+		p_sound->play();
 }
 
 void Hero::mouse(const df::EventMouse* p_mouse_event) {
@@ -140,4 +144,8 @@ void Hero::nuke() {
 	// send view event to decrement nukes.
 	df::EventView ev("Nukes", -1, true);
 	WM.onEvent(&ev);
+	// play nuke sound.
+	df::Sound* p_sound = RM.getSound("nuke");
+	if (p_sound)
+		p_sound->play();
 }
