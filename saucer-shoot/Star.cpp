@@ -18,10 +18,14 @@ Star::Star() {
 	df::Vector p((float)(rand() % (int)WM.getBoundary().getHorizontal()),
 		(float)(rand() % (int)WM.getBoundary().getVertical()));
 	setPosition(p);
-}
 
-int Star::draw() {
-	return DM.drawCh(getPosition(), STAR_CHAR, df::WHITE);
+	// draw star with circle.
+	// closer stars are bigger and move faster.
+	df::Shape s;
+	s.setColor(df::WHITE);
+	s.setType(df::CIRCLE);
+	s.setSize(5 * getVelocity().getMagnitude());
+	setShape(s);
 }
 
 int Star::eventHandler(const df::Event* p_e) {
@@ -38,4 +42,10 @@ void Star::out() {
 
 	setPosition(p);
 	setVelocity(df::Vector(-1.0 / (rand() % 10 + 1), 0));
+
+	df::Shape s;
+	s.setColor(df::WHITE);
+	s.setType(df::CIRCLE);
+	s.setSize(5 * getVelocity().getMagnitude());
+	setShape(s);
 }

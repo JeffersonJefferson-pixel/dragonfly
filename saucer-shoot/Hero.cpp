@@ -8,6 +8,7 @@
 #include "EventNuke.h"
 #include "Hero.h"
 #include "GameOver.h"
+#include "DisplayManager.h"
 
 Hero::Hero() {
 	move_slowdown = 2;
@@ -41,6 +42,8 @@ Hero::~Hero() {
 	df::addParticles(df::SPARKS, getPosition(), 2, df::YELLOW);
 	df::addParticles(df::SPARKS, getPosition(), 3, df::RED);
 	df::addParticles(df::SPARKS, getPosition(), 3, df::RED);
+	// shake screen.
+	DM.shake(20, 20, 10);
 }
 
 int Hero::eventHandler(const df::Event* p_e) {

@@ -8,6 +8,7 @@
 #include "ResourceManager.h"
 #include "Star.h"
 #include "GameStart.h"
+#include "Pause.h"
 
 void loadResources(void) {
     // load saucer sprite.
@@ -37,6 +38,8 @@ void populateWorld(void) {
     }
     // game start
     new GameStart();
+    // enable player to pause.
+    new df::Pause(df::Keyboard::F10);
 }
 
 int main(int argc, char *argv[]) {

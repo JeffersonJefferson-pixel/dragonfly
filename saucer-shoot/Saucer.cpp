@@ -66,7 +66,7 @@ void Saucer::moveToStart() {
 	temp_pos.setX(world_horiz + rand() % (int)world_horiz + 3.0f);
 
 	// y is in verifical range
-	temp_pos.setY(rand() % (int)(world_vert - 1) + 1.0f);
+	temp_pos.setY(rand() % (int)(world_vert - 4) + 4.0f);
 
 	// if collosion, move right slightly until empty space.
 	df::ObjectList collision_list = WM.getCollisions(this, temp_pos);
@@ -94,6 +94,10 @@ void Saucer::hit(const df::EventCollision* p_collision_event) {
 		WM.markForDelete(p_collision_event->getObject1());
 		WM.markForDelete(p_collision_event->getObject2());
 	}
+	// play explode sound
+	df::Sound* p_sound = RM.getSound("explode");
+	if (p_sound)
+		p_sound->play();
 }
 
 void Saucer::destroy() {

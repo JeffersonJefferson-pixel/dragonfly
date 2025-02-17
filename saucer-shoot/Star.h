@@ -9,6 +9,5 @@ private:
 
 public:
 	Star();
-	int draw(void) override;
 	int eventHandler(const df::Event* p_e) override;
 };
